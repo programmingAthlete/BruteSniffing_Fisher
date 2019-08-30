@@ -1,0 +1,6 @@
+## Required libreries
+LIBRERY  PACKEGE_NAME
+-------  ------------
+urllib3  urllib.request
+requests  requests
+BeautifulSoup  bs4
