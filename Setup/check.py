@@ -78,6 +78,14 @@ def check():
         import nmap
     except:
         exceptions.append('python-nmap')
+    try:
+        import ctypes
+    except:
+        exceptions.append('ctypes')
+    try:
+        import netaddr
+    except:
+        exceptions.append('netaddr')
 
     versionList = []
     version = sys.version.split(" ")[0][:3]
