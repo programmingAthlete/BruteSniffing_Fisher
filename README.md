@@ -23,6 +23,7 @@ libraries required:
 * BeautifulSoup
 * ctypes
 * netaddr
+* python-nmap
 
 ## Structure
 Hirerchy of the project:
