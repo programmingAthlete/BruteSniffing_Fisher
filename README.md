@@ -21,6 +21,8 @@ libraries required:
 * requests
 * urllib3
 * BeautifulSoup
+* ctypes
+* netaddr
 
 ## Structure
 Hirerchy of the project:
@@ -49,3 +51,6 @@ Proxychains and Tor are supported for Linux platforms. Edit the settings in the 
 * Functionalities can be added adding 'menus' in the Setup.setup.py file, modules in the modules directories and functions in the Includes.includes.py file.
 * The server settings may be improved, the goal would be to make the fishing attack available using the default web server of a system
 * In the fishing attack the python program waits for a temp.txt file to be created by the php code, then deleted it. The process has to be slowed down for the python program to grab the tmp.txt file.
+
+## References
+Reference for the web page bruteforcing: https://github.com/IAmBlackHacker/Facebook-BruteForce
