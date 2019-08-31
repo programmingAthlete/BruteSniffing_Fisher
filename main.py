@@ -9,7 +9,7 @@ import modules.controller as controller
 
 print('''
 
-Welcome to the BRUTESNIFFING FICHER, and hacking tools that anables you to do bruteforcing attacks - on web servers and on secured files, fishing attacks and scanning and sniffing attcks all in one tool
+Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - on web servers and on secured files, fishing attacks and scanning and sniffing attacks
 
 ''')
 
