@@ -16,8 +16,8 @@ The program has been developed using python3.6. However no issue should occur wi
 You can select from the compatible versions in the Setup/setup.py file by uncommenting the line corresponding to the version you choose (and by commenting the other versions).
 
 ## Requirements
-Automatically checks for the presence of the required libraries and installs if you consent it. If you don't consent it, show you the command to perform to install the libraries.
-libraries required:
+Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform to install the libraries.\\
+Libraries required:
 * requests
 * urllib3
 * BeautifulSoup
