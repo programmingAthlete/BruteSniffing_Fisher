@@ -3,8 +3,9 @@
 ## Introduction
 Welcome to the ButeSniffing_Ficher, a multiplatform python hacking tool in a menu style.</br>
 
-Launch the program by</br>
-   * _python main.py_
+Launch the program by the command line by</br>
+*
+  * _python main.py_
    
 It allows you do to:
 * Sniffing
