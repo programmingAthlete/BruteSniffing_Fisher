@@ -2,7 +2,6 @@ from Setup import setup, check
 import sys
 
 ## Check the reauirements
-check.pip_installation()
 check.check()
 
 import modules.controller as controller
