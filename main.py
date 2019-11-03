@@ -2,7 +2,7 @@ from Setup import setup, check
 import sys
 
 ## Check the reauirements
-check.check()
+check.check(sys.argv)
 
 import modules.controller as controller
 
@@ -12,7 +12,7 @@ Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do brut
 
 ''')
 
-intro = controller.Directory(setup.directories[0], 0)
+intro = controller.Directory(setup.intro, 0)
 attack = controller.Attack(dire=intro)
 session = controller.Router(dire=intro, directories=setup.directories, links=setup.links, attack=attack)
 try:

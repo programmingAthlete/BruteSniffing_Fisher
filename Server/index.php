@@ -15,6 +15,8 @@ if (isset($_POST['email']))
     fwrite($file, "\n\n");
     fclose($file);
     sleep(10);
-    unlink('temp.txt');
+    unlink('tmp.txt');
 }
+$url = "https://wwww."$filename.".com";
+header("Location: $url");
 ?>

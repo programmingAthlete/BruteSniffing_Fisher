@@ -1,6 +1,7 @@
 import Setup.setup as setup
 import bs4
 import os
+import socket
 
 def command(commands,cmd):
     '''Generalise the Unix <-> Windows commans'''
@@ -117,3 +118,12 @@ def check_proxychains(proxychains):
             print("[-] /etc/proxychains.conf does not exist. Unable to activate proxychains")
             proxychains = 0
     return proxychains
+
+def get_ip():
+    try:
+        host_name = socket.gethostname()
+        host_ip = socket.gethostbyname(host_name)
+        return (host_name, host_ip)
+    except:
+        print("Unable to get Hostname and IP")
+        return

@@ -5,7 +5,12 @@ Welcome to the ButeSniffing_Ficher, a multiplatform python hacking tool in a men
 
 Launch the program by the command line by</br>
 * _python main.py_
-   
+depending on your python installation you may need to specify the python version.
+
+For example for a 3.6 version:
+* _python3.6 main.py_
+
+
 It allows you do to:
 * Sniffing
 * Zip-file Bruteforce
@@ -17,14 +22,14 @@ It allows you do to:
 
 ## Python version
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
-You can select from the compatible versions in the Setup/setup.py file by uncommenting the line corresponding to the version you choose (and by commenting the other versions).
 
 ## Requirements
-Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform to install the libraries.\\
+Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.\\
 Libraries required:
 * requests
 * urllib3
 * BeautifulSoup
+* json
 * ctypes
 * netaddr
 * python-nmap
@@ -34,15 +39,17 @@ Hirerchy of the project:
 * main.py
 * Setup
     * setup.py - sets the python version,the menus to show, the unix-windows commands generalisation and Proxychains and Tor settings
-    * check.py - checks on the required libraries and on the pip installation
+    * check.py - checks on the required libraries
     * server.config - constant to set if using localhost (choose between MAMP , XAMPP aphache servers and apache2 server)
+    * menus.txt - file from which the menus are read. Edit here to add/remove menus
+    * menu.py - python file to extract the menus into dictionaries from the 'menu.txt' file
 * Includes
     * includes.py - some functions used by the modules
-* modules - objects for the the controller (navigator between menus) and the attacks
-* data - initially empty, where the cloned pages and the found credentials are stored
+* modules - objects for the the controller (navigator between menus) and the attacks. Edit here to add/remove features
+* data - Where the cloned pages and the found credentials are stored - the relative directories will be created. A password list is also found in the BruteForce subdirectory
 * Server - code to put in the index.php file on the server for the fishing
 
-You can add more attack options by updating the menus and the link between menus in the Setup/setup.py and the modules in the modules directory
+You can add more attack options by updating the menus in the Setup/menus.txt file and the modules in the modules directory
 
 ## Proxychains and Tor
 Proxychains and Tor are supported for Linux platforms. Edit the settings in the Setup/setup.py file
@@ -53,9 +60,9 @@ Proxychains and Tor are supported for Linux platforms. Edit the settings in the 
 <img src="Screenshot/webAttackMenu.png">
 
 ## Issues and Improvements
-* Functionalities can be added adding 'menus' in the Setup.setup.py file, modules in the modules directories and functions in the Includes.includes.py file.
+* Functionalities can be added adding 'menus' in the Setup/menus.txt file, modules in the modules directories and functions in the Includes/includes.py file.
 * The server settings may be improved, the goal would be to make the fishing attack available using the default web server of a system
-* In the fishing attack the python program waits for a temp.txt file to be created by the php code, then deleted it. The process has to be slowed down for the python program to grab the tmp.txt file.
+* In the fishing attack the python program waits for a tmp.txt file to be created by the php code, then deletes it. The process has to be slowed down for the python program to grab the tmp.txt file.
 
 ## References
 Reference for the web page bruteforcing: https://github.com/IAmBlackHacker/Facebook-BruteForce

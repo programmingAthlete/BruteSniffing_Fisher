@@ -1,0 +1,13 @@
+### 'root' ###
+1 'Web Attack'
+2 'Zip-file Bruteforce'
+3 'Sniffing'
+99 'Exit'
+
+### 'Web Attack' ###
+1 'Information Gathering'
+2 'Bruteforce'
+3 'Cloning'
+4 'Fishing'
+98 'Back'
+99 'Exit'

