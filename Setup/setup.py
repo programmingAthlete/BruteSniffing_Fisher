@@ -1,4 +1,4 @@
-import Setup.menu as menu
+import Includes.menu as menu
 
 commands = { 'create':
                 {'posix' : 'touch', 'nt' : 'echo '' > '},
