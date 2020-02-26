@@ -4,12 +4,15 @@
 Welcome to the ButeSniffing_Ficher, a multiplatform python hacking tool in a menu style.</br>
 
 Launch the program by the command line by</br>
-* _python main.py_
+
+    python main.py
+
 
 depending on your python installation you may need to specify the python version.
 
 For example for a 3.6 version:
-* _python3.6 main.py_
+
+     python3.6 main.py
 
 
 It allows you do to:
@@ -23,6 +26,7 @@ It allows you do to:
 
 ## Python version
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
+
 
 ## Requirements
 Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.\\

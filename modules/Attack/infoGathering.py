@@ -1,10 +1,12 @@
 import nmap
 import time
+import Includes.includes as include
+import Setup.setup as setup
 
 def scanner():
     ''' Runs the scanner '''
 
-    slash = include.command(commands, 'slash')
+    slash = include.command(setup.commands, 'slash')
     dir = "data%sInformationGathering" % slash
 
     target = str(input('target to scan: '))
@@ -32,4 +34,3 @@ def scanner():
         f.write('\n')
 
     print("[+] The scan on %s and port %s completed succeffuly.\n The results are in /data/%s.txt" %(target, port, target))
-

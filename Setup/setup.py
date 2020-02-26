@@ -19,10 +19,15 @@ commands = { 'create':
 directories, links = menu.construct_menus()
 intro = directories[0]
 
-#intro = {1: 'Web Attack', 2: 'Zip-file Bruteforce', 3 : 'Sniffing',  99 : 'Exit'}
-#web_attack = {1 : 'Information Gathering', 2 : 'Bruteforce', 3 : 'Cloning', 4 : 'Fishing', 98 : 'Back', 99 : 'Exit'}
-#links = [('Web Attack',1)]
-#directories = [ intro, web_attack ]
-
+########################################################################
+## If you want to specify the python version for the run function of
+## bruteforce attack, uncomment the corresponding version bruteforce
+## attack
+######################################################################## 
+#pythonVersion = "3"
+#pythonVersion = "3.1"
+#pythonVersion = "3.5"
+#pythonVersion = "3.6"
+#pythonVersion = "3.7"
 proxychains = "Off"
 tor = "Off" # activate only if proxychains is on
