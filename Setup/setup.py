@@ -1,5 +1,6 @@
 import Includes.menu as menu
 
+####### commands generalisation unix <-> microsoft
 commands = { 'create':
                 {'posix' : 'touch', 'nt' : 'echo '' > '},
             'clear':
@@ -16,6 +17,7 @@ commands = { 'create':
                 {'posix' : '/', 'nt' : '\\'}
             }
 
+####### prepare menus
 directories, links = menu.construct_menus()
 intro = directories[0]
 
@@ -29,5 +31,10 @@ intro = directories[0]
 #pythonVersion = "3.5"
 #pythonVersion = "3.6"
 #pythonVersion = "3.7"
+
+#######################################################
+## proxychanis and tor only vailable for Linux users
+## Set to "On" to activate 
+########################################################
 proxychains = "Off"
 tor = "Off" # activate only if proxychains is on
