@@ -73,7 +73,7 @@ class Router:
             elif x > max_index(self.dire.dict):
                 print('\n[-]',x,"is not a valid argument\n")
                 continue
-            if self.links[0][0] in list(self.dire.dict.values()) and x == self.links[0][1]:
+            if any(self.links[i][0] in list(self.dire.dict.values()) and x == self.links[i][1] for i in range(len(self.links))):
                 self.dire.change_directory(self.dirS[x],x)
             else:
                 self.attack.name = self.dire.dict[x]
@@ -103,4 +103,3 @@ class Attack:
             fishing.clone()
         elif self.name == "Fishing":
             fishing.fish()
-
