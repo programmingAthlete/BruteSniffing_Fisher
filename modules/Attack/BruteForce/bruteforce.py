@@ -7,6 +7,12 @@ import json
 import os
 import sys
 
+class Bruteforce:
+
+	def run():
+		run()
+
+
 def passFile_input_descriptio():
 	'''
 	Prints information about the password file

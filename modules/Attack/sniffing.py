@@ -5,6 +5,12 @@ from netaddr import IPNetwork, IPAddress
 import socket
 import os
 
+
+class Sniffing:
+
+    def run():
+        sniffing()
+
 def udp_sender(subnet, magicMessage):
     '''
     Sends UDP  packets

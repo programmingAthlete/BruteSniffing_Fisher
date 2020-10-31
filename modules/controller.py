@@ -1,9 +1,10 @@
 import Setup.setup as setup
 import Includes.includes as includes
-import modules.Attack.BruteForce.bruteforce as bruteforce
-from modules.Attack import fishing, sniffer, infoGathering
+#import modules.Attack.BruteForce.bruteforce as bruteforce
+#from modules.Attack import fishing, sniffer, infoGathering
 import os
 import sys
+import modules.Attack.core as core
 
 
 def max_index(dictionary):
@@ -90,16 +91,6 @@ class Attack:
         self.dire = dire
 
     def run(self):
-        self.dire.clear_screen()
-        if self.name == "Information Gathering":
-            infoGathering.scanner()
-        elif self.name == "Sniffing":
-            sniffer.sniffing()
-        elif self.name == 'Zip-file Bruteforce':
-            bruteforce.zip_bruteForce()
-        elif self.name == "Bruteforce":
-            bruteforce.run()
-        elif self.name == "Cloning":
-            fishing.clone()
-        elif self.name == "Fishing":
-            fishing.fish()
+        attack = core.Core(self.name)
+        attack.run()
+    

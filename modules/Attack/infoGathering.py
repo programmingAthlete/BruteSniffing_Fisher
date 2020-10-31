@@ -3,6 +3,12 @@ import time
 import Includes.includes as include
 import Setup.setup as setup
 
+class InformationGathering:
+
+    def run():
+        scanner()
+
+
 def scanner():
     ''' Runs the scanner '''
 
@@ -10,7 +16,7 @@ def scanner():
     dir = "data%sInformationGathering" % slash
 
     target = str(input('target to scan: '))
-    port = int(input('port where to scan: '))
+    port = str(input('port where to scan: '))
 
     nm_scan = nmap.PortScanner()
 
