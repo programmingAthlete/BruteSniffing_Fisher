@@ -28,7 +28,7 @@ It allows you do to:
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
 
 
-## Requirements
+## Requirements Install
 Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.\\
 Libraries required:
 * requests
@@ -50,7 +50,7 @@ Hirerchy of the project:
     * menu.py - python file to extract the menus into dictionaries from the 'menu.txt' file
 * Includes
     * includes.py - some functions used by the modules
-* modules - objects for the the controller (navigator between menus) and the attacks. Edit here to add/remove features
+* modules - objects for the controller (navigator between menus) and the attacks. Edit here to add/remove features. Each attack should be a class with a run method.
 * data - Where the cloned pages and the found credentials are stored - the relative directories will be created. A password list is also found in the BruteForce subdirectory.
 * Server - code to put in the index.php file on the server for the fishing
 
