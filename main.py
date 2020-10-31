@@ -1,6 +1,5 @@
 from Setup import setup, check
 import sys
-#import modules.Attack.core as core
 
 ## Check the reauirements
 check.check(sys.argv)

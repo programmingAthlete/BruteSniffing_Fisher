@@ -1,7 +1,5 @@
 import Setup.setup as setup
 import Includes.includes as includes
-#import modules.Attack.BruteForce.bruteforce as bruteforce
-#from modules.Attack import fishing, sniffer, infoGathering
 import os
 import sys
 import modules.Attack.core as core
@@ -93,4 +91,3 @@ class Attack:
     def run(self):
         attack = core.Core(self.name)
         attack.run()
-    
