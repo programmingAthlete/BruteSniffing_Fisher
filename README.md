@@ -28,9 +28,10 @@ It allows you do to:
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
 
 
-## Requirements Install
-Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.\\
-Libraries required:
+## Requirements Installation
+Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.
+
+Libraries to install:
 * requests
 * urllib3
 * BeautifulSoup
