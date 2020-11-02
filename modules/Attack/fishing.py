@@ -8,6 +8,9 @@ import os
 
 class Fishing:
 
+    def __str__():
+        return 'Fishing attack'
+
     def run():
         fish()
 

@@ -8,6 +8,9 @@ import os
 
 class Sniffing:
 
+    def __str__():
+        return 'Sniffing attack'
+
     def run():
         sniffing()
 

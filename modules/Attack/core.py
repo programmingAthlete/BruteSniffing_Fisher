@@ -32,4 +32,5 @@ class Core:
                     return
 
         class_ = getattr(module, self.class_)
+        print(class_)
         class_.run()

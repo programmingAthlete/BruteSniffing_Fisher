@@ -7,6 +7,9 @@ import os
 
 class Cloning:
 
+    def __str__():
+        return 'Cloning attack'
+
     def run():
         clone()
 

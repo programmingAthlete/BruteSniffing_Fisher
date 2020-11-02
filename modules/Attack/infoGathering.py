@@ -5,6 +5,9 @@ import Setup.setup as setup
 
 class InformationGathering:
 
+    def __str__():
+        return 'Nmap attack'
+
     def run():
         scanner()
 
