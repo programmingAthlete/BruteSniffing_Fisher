@@ -96,12 +96,12 @@ def function(email,passw,i,headers,url, proxychains):
 	data_json = str(json.dumps(data))
 	script = "modules%sAttack%sBruteForce%srun.py" % (slash,slash,slash)
 	try:
-		setup.pythonVersion
+		command_version = setup.pythonVersion
 	except:
-		pythonVersion = includes.getVersion()
-	cmd = "python%s %s -u %s -d '%s'" % (pythonVersion, script, url, data_json)
+		command_version = getVersion.get_version()[0]
+	cmd = "python%s %s -u %s -d '%s'" % (command_version, script, url, data_json)
 	if proxychains == 1:
-		cmd = "proxychains python%s run.py -u %s -d '%s'" % (pythonVersion, url, data_json)
+		cmd = "proxychains python%s run.py -u %s -d '%s'" % (command_version, url, data_json)
 	result = os.system(cmd)
 	if result == 0:
 		print("Password found: ", passw)
