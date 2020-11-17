@@ -29,7 +29,7 @@ The program has been developed using python3.6. However no issue should occur wi
 
 
 ## Requirements Installation
-Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries.
+Automatically checks for the presence of the required libraries and installs them if you consent it. If you don't consent it, it shows you the command to perform the installation of the libraries. The libraries to install are read from the Setup/requirements.txt file.
 
 Libraries to install:
 * requests

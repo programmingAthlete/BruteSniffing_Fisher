@@ -10,10 +10,10 @@ import time
 def read_libs():
     #f = open('requirements.txt', 'r')
     modules = []
-
-    f = open('Setup/requirements.txt', 'r')
+    slash = setup.commands['slash'][os.name]
+    f = open('Setup'+slash+'/requirements.txt', 'r')
     for line in f:
-        if line != "":
+        if line != "\n" and "LIBRERY" not in line:
             module = line.split(' ----> ')[0].strip(" ")
             packege = line.split(' ----> ')[1].strip("\n").strip(" ")
             modules.append((module, packege))
