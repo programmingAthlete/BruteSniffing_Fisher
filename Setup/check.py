@@ -7,45 +7,66 @@ import subprocess
 import sys
 import time
 
+def read_libs():
+    #f = open('requirements.txt', 'r')
+    modules = []
+
+    f = open('Setup/requirements.txt', 'r')
+    for line in f:
+        if line != "":
+            module = line.split(' ----> ')[0].strip(" ")
+            packege = line.split(' ----> ')[1].strip("\n").strip(" ")
+            modules.append((module, packege))
+    return modules
+
 def check(args):
     '''
     Check the libraries, if they are not istalled, it asks if to install the packeges automatically
     :return: void
     '''
+    mod= read_libs()
+    #print(mod)
     exceptions = []
-    try:
-        import urllib.request
-    except ImportError:
+    for item in mod:
+        try:
+            import_module(item[0])
+        except:
+            exceptions.append(item[1])
 
-        exceptions.append('urllib3')
-    try:
-        import requests
-    except ImportError:
-        exceptions.append('requests')
-    try:
-        import bs4
-    except ImportError:
-        exceptions.append('bs4')
-    try:
-        import netaddr
-    except:
-        exceptions.append('netaddr')
-    try:
-        import nmap
-    except:
-        exceptions.append('python-nmap')
-    try:
-        import ctypes
-    except:
-        exceptions.append('ctypes')
-    try:
-        import netaddr
-    except:
-        exceptions.append('netaddr')
-    try:
-        import json
-    except:
-        exceptions.append('json')
+
+    #try:
+    #    import urllib.request
+    #except ImportError:
+#
+#        exceptions.append('urllib3')
+#    try:
+#        import requests
+#    except ImportError:
+#        exceptions.append('requests')
+#    try:
+#        import bs4
+#    except ImportError:
+#        exceptions.append('bs4')
+#    try:
+#        import netaddr
+#    except:
+#        exceptions.append('netaddr')
+#    try:
+#        import nmap
+#    except:
+#        exceptions.append('python-nmap')
+#    try:
+#        import ctypes
+#    except:
+#        exceptions.append('ctypes')
+#    try:
+#        import netaddr
+#    except:
+#        exceptions.append('netaddr')
+#    try:
+#        import json
+#    except:
+#        exceptions.append('json')
 
     versionList = []
     command_version, version = getVersion.get_version()
@@ -59,10 +80,10 @@ def check(args):
             print('''The python version you are using is different than your default version
             \tdefault verion: %s
             \tyour version: %s
-            ''' % (defaultVersion, version))
+            ''' % (command_version, version))
             print('You need to specify the python versions correpsonding command to install the packeges')
 
-        print('''To install the packages needed
+        print('''To install the packeges needed:
                         python%s -m pip install 'package name' \n ''' % ( command_version))
         show = '''To install the packages manually:\n
                         \t python%s pip install 'package name\n If you want the program to install the packages automatically, the following commands will be performed''' % (command_version)

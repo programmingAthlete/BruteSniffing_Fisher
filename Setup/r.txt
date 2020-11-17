@@ -1,0 +1,11 @@
++---------------+--------------+
+|    LIBRERY    | PACKAGE NAME |
++---------------+--------------+
+|    urllib3    |   urllib3    |
+|    requests   |   requests   |
+| BeautifulSoup |     bs4      |
+|      nmap     | python-nmap  |
+|      json     |     json     |
+|     ctypes    |    ctypes    |
+|    netaddr    |   netaddr    |
++---------------+--------------+

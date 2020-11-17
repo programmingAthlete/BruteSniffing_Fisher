@@ -27,10 +27,10 @@ class Core:
                 module = importlib.import_module('modules.Attack.BruteForce.'+self.module)
             except ModuleNotFoundError:
                 print('[-] Module %s not found' % self.module)
+                module = ''
                 x = str(input("\nType anything to exit"))
                 if x:
                     return
 
         class_ = getattr(module, self.class_)
-        print(class_)
         class_.run()
