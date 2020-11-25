@@ -89,7 +89,7 @@ def check(args):
                         \t python%s pip install 'package name\n If you want the program to install the packages automatically, the following commands will be performed''' % (command_version)
         print(show)
         for item in exceptions:
-            print('\tpoython%s -m pip install %s' % (str(command_version), item))
+            print('\tpython%s -m pip install %s' % (str(command_version), item))
 
         a = str(input('Do you want to install the packages atomatically???? y/n '))
         if str(a) == 'y':
