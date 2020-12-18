@@ -1,5 +1,6 @@
 import requests
 import Setup.setup as setup
+import Includes.version as getVersion
 import Includes.includes as includes
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
