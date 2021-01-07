@@ -1,7 +1,7 @@
 from Setup import setup, check
 import sys
 
-## Check the reauirements
+## Check the requirements
 check.check(sys.argv)
 
 import modules.controller as controller
