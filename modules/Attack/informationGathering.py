@@ -2,6 +2,7 @@ import nmap
 import time
 import Includes.includes as include
 import Setup.setup as setup
+import time
 
 class InformationGathering:
 
@@ -20,11 +21,22 @@ def scanner():
 
     target = str(input('target to scan: '))
     port = str(input('port where to scan: '))
-
-    nm_scan = nmap.PortScanner()
-
-    nm_scanner = nm_scan.scan(target, port, arguments='-O')  # -O argument for OS finger printing
-
+    try:
+        nm_scan = nmap.PortScanner()
+    except:
+        print("[-] An error occorred while initiating the scan")
+        time.sleep(1)
+        print("Exiting the attack....")
+        time.sleep(5)
+        return
+    try:
+        nm_scanner = nm_scan.scan(target, port, arguments='-O')  # -O argument for OS finger printing
+    except:
+        print("[-] Incorrect host %s" % target)
+        time.sleep(2)
+        print("Exiting the attack....")
+        time.sleep(5)
+        return
     host_is_up = "The host is : " + nm_scanner['scan'][target]['status']['state'] + '\n'
     port_is_open = "The port %s is : %s" % (port, nm_scanner['scan'][target]['tcp'][int(port)]['state']) + "\n"
     methos_scan = "The method of scanning is : " + nm_scanner['scan'][target]['tcp'][int(port)]['reason'] + "\n"
