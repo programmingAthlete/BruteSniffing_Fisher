@@ -44,8 +44,8 @@ Libraries to install:
 Hirerchy of the project:
 * main.py
 * Logs - exceptions logs
-    * main.txt - exception logs raised from main.py
-    * controller.txt - exception logs raised from controller.py
+    * main.txt - exception raised from main.py
+    * controller.txt - exception raised from controller.py
 * Setup
     * setup.py - sets the python version, the menus to show, the unix-windows commands generalisation and Proxychains and Tor settings
     * check.py - checks on the required libraries
