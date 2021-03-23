@@ -43,6 +43,9 @@ Libraries to install:
 ## Structure
 Hirerchy of the project:
 * main.py
+* Logs - exceptions logs
+    * main.txt - exception logs raised from main.py
+    * controller.txt - exception logs raised from controller.py
 * Setup
     * setup.py - sets the python version, the menus to show, the unix-windows commands generalisation and Proxychains and Tor settings
     * check.py - checks on the required libraries
@@ -60,8 +63,8 @@ You can add more menus by updating the file Setup/menus.txt - RESPECT THE FORMAT
 You can add the corresponding features by updating the modules/Attack directory adding the file with the corresposiding non-spaced name and the non-spaced uppersized first letter class name.
 
 #### Example - add an Exploit
-Add "Exploit Name" in the Setup/menu.txt file, create the exploitName.py file in the modules/Attack directory and implement the ExplotName class containing a run() method. 
- 
+Add "Exploit Name" in the Setup/menu.txt file, create the exploitName.py file in the modules/Attack directory and implement the ExplotName class containing a run() method.
+
 ## Proxychains and Tor
 Proxychains and Tor are supported for Linux platforms. Edit the settings in the Setup/setup.py file
 
