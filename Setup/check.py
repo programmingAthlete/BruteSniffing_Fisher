@@ -19,7 +19,7 @@ def read_libs():
             modules.append((module, packege))
     return modules
 
-def check(args):
+def check():
     '''
     Check the libraries, if they are not istalled, it asks if to install the packeges automatically
     :return: void

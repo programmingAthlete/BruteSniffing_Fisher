@@ -1,22 +1,27 @@
-from Setup import setup, check
-import sys
-
-## Check the requirements
-check.check(sys.argv)
 
 import modules.controller as controller
 
-print('''
+def main():
+    print('''
+    Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - on web servers and on secured files, fishing attacks and scanning and sniffing attacks
+    ''')
 
-Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - on web servers and on secured files, fishing attacks and scanning and sniffing attacks
+    intro = controller.Directory(setup.intro, 0)
+    attack = controller.Attack(dire=intro)
+    session = controller.Router(dire=intro, directories=setup.directories, links=setup.links, attack=attack)
+    try:
+        session.start()
+    except KeyboardInterrupt:
+        print('\nExiting...')
+        sys.exit(0)
+    except Exception as e:
+        print("\n[-] Exception occored\n")
+        print(e)
+        includes.exception_handeler(traceback.format_exc(), "main/")
 
-''')
 
-intro = controller.Directory(setup.intro, 0)
-attack = controller.Attack(dire=intro)
-session = controller.Router(dire=intro, directories=setup.directories, links=setup.links, attack=attack)
-try:
-    session.start()
-except KeyboardInterrupt:
-    print('\nExiting...')
-    sys.exit(0)
+if __name__ == "__main__":
+    from Setup import setup, check
+    ## Check the requirements
+    check.check()
+    main()

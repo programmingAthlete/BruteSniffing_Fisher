@@ -2,6 +2,7 @@ import Setup.setup as setup
 import bs4
 import os
 import socket
+from datetime import datetime
 
 def command(commands,cmd):
     '''Generalise the Unix <-> Windows commans'''
@@ -137,3 +138,10 @@ def getVersion():
     elif '2' in pythonVersion:
         version = '3'
     return version
+
+def exception_handeler(error, file):
+    now = datetime.now()
+    with open("Logs/"+file+".txt", 'a') as f:
+        f.write("*"*90+"\n")
+        f.write(str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
+        f.write(error+"\n\n")

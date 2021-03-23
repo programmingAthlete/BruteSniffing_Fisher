@@ -3,6 +3,7 @@ import Includes.includes as includes
 import os
 import sys
 import modules.Attack.core as core
+import traceback
 
 
 def max_index(dictionary):
@@ -59,9 +60,15 @@ class Router:
             except KeyboardInterrupt:
                 print("\nExiting...")
                 sys.exit(0)
-            except:
-                print("\nInput mus be an integer")
+            except ValueError:
+                print("\n[-] Input must be an integer\n")
                 continue
+            except Exception as e:
+                print("\n[-] Exception occored\n")
+                print(e)
+                includes.exception_handeler(traceback.format_exc(), "controller/")
+
+
 
             if x == 99:
                 sys.exit(0)
