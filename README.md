@@ -35,7 +35,6 @@ Libraries to install:
 * requests
 * urllib3
 * BeautifulSoup
-* json
 * ctypes
 * netaddr
 * python-nmap
