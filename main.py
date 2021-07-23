@@ -1,9 +1,18 @@
+import sys
+import traceback
 
-import modules.controller as controller
 
+
+from Setup.check import check
+
+
+@check
 def main():
+    import modules.controller as controller
+    from Includes import includes
     print('''
-    Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - on web servers and on secured files, fishing attacks and scanning and sniffing attacks
+    Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - 
+    on web servers and on secured files, fishing attacks and scanning and sniffing attacks
     ''')
 
     intro = controller.Directory(setup.intro, 0)
@@ -23,5 +32,4 @@ def main():
 if __name__ == "__main__":
     from Setup import setup, check
     ## Check the requirements
-    check.check()
     main()

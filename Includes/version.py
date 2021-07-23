@@ -1,13 +1,12 @@
 import subprocess
 import sys
 
+
 def get_version():
-    version = sys.version.split(" ")[0][:3]
-    command_version = ''
-    cmd = "python -V"
-    p = subprocess.Popen(cmd, shell=True, stderr=subprocess.PIPE)
-    defaultVersion = p.stderr.read(10).decode('utf-8')
-    if defaultVersion[:-3] == version:
+    version = sys.version.split(" ")[0]
+    output = subprocess.run(["python", "-V"], capture_output=True).stdout.decode('utf-8').strip("\n")
+    default_version = output.split(" ")[1]
+    if default_version == version:
         command_version = ''
     else:
         if float(version) < 3.:

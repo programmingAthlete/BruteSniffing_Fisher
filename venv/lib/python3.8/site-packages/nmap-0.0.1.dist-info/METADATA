@@ -1,0 +1,20 @@
+Metadata-Version: 2.0
+Name: nmap
+Version: 0.0.1
+Summary: Map numbers from one range to another
+Home-page: https://github.com/antonagestam/nmap/
+Author: Anton Agestam
+Author-email: msn@antonagestam.se
+License: MIT License
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: Developers
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Utilities
+
+UNKNOWN
+
+

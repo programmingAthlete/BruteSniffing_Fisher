@@ -1,0 +1,4 @@
+requests==2.26.0
+nmap==0.0.1
+netaddr==0.8.0
+bs4==4.9.3
