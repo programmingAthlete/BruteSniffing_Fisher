@@ -1,11 +1,10 @@
 import importlib
 import inspect
-import sys
-import time
+
 
 class Core:
 
-    def __init__(self,name):
+    def __init__(self, name):
 
         if " " in name:
             name = name.replace(" ", "")
@@ -21,10 +20,10 @@ class Core:
 
     def run(self):
         try:
-            module = importlib.import_module('modules.Attack.'+self.module)
+            module = importlib.import_module('modules.Attack.' + self.module)
         except ModuleNotFoundError:
             try:
-                module = importlib.import_module('modules.Attack.BruteForce.'+self.module)
+                module = importlib.import_module('modules.Attack.BruteForce.' + self.module)
             except ModuleNotFoundError:
                 print('[-] Module %s not found' % self.module)
                 module = ''

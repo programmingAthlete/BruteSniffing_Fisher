@@ -1,6 +1,6 @@
 import requests
 import Setup.setup as setup
-import Includes.includes as includes
+import utils.utils as includes
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
 import json

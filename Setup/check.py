@@ -3,20 +3,19 @@ import sys
 import time
 from importlib import import_module
 
-import Includes.version as getVersion
 import Setup.setup as setup
+from utils.version import get_version
 
 
 def read_libs():
-    # f = open('requirements.txt', 'r')
     modules = []
     slash = setup.commands['slash'][os.name]
     f = open('Setup' + slash + '/requirements.txt', 'r')
     for line in f:
         if line != "\n" and "LIBRERY" not in line:
             module = line.split(' ----> ')[0].strip(" ")
-            packege = line.split(' ----> ')[1].strip("\n").strip(" ")
-            modules.append((module, packege))
+            package = line.split(' ----> ')[1].strip("\n").strip(" ")
+            modules.append((module, package))
     return modules
 
 
@@ -38,9 +37,9 @@ def check(fun):
         for item in mod:
             try:
                 import_module(item.split("==")[0])
-            except Exception:
+            except ImportError:
                 exceptions.append(item)
-        command_version, version = getVersion.get_version()
+        command_version, version = get_version()
         if len(exceptions) > 0:
             print("[-] The following libraries are missing")
             time.sleep(1)

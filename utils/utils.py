@@ -1,60 +1,65 @@
-import Setup.setup as setup
-import bs4
 import os
 import socket
 from datetime import datetime
 
-def command(commands,cmd):
-    '''Generalise the Unix <-> Windows commans'''
+import bs4
+
+import Setup.setup as setup
+
+
+def command(commands, cmd):
+    """ Generalise the Unix <-> Windows commands """
     return commands[cmd][os.name]
 
-def construct_url(url):
-    '''
+
+def construct_url(url: str) -> (str, str):
+    """
     build the url depending on what the user inputs
 
     :param      url:        user input:         str
     :return:    url:        builded url:        str
                 siteDomain: domain of the site: str
-    '''
+    """
     if 'www' in url:
-        siteDomain = url.split(".")[1]
-        if 'facebook' in siteDomain:
+        site_domain = url.split(".")[1]
+        if 'facebook' in site_domain:
             url = "https://%s/login.php?" % url
         else:
             url = "https://%s" % url
     else:
-        siteDomain = url
+        site_domain = url
         if url == 'facebook':
             url = "https://%s.com/login.php?" % url
         else:
             url = "https://%s.com" % url
-    return url, siteDomain
+    return url, site_domain
 
-def HTMLParser(fileName, outputFile):
-    '''
+
+def html_parser(file_name: str, output_file: str) -> None:
+    """
     Edits the action parameter of the form to index.txt of the file "filename"
 
-    :param      fileName:   input of the file: str
-    :param      outputFile: edited file:       str
+    :param      file_name:   input of the file: str
+    :param      output_file: edited file:       str
     :return:    void
-    '''
+    """
 
-    f = open(fileName, 'r')
-    txt = f.read()
+    with open(file_name, 'r') as f:
+        txt = f.read()
     soup = bs4.BeautifulSoup(txt, features='lxml')
     tag = soup.form
     tag['action'] = "index.php"
-    f.close()
     print("---------------------------------------------")
     print("---------------------------------------------")
     print("---------------------------------------------")
     print("---------------------------------------------")
     html = soup.prettify("utf-8")
-    with open(outputFile, "wb") as file:
+    with open(output_file, "wb") as file:
         file.write(html)
 
-def ifexists(fileName):
-    '''
+
+def ifexists(file_name: str) -> str:
+    """
     Checks the existence of a file
         if False creates it and saves it't location in 'fileName'
         if True, asks if to overwrirte the file
@@ -62,43 +67,43 @@ def ifexists(fileName):
 
     :param:     fineName:       str
     :return:    outputFileName: str
-    '''
+    """
 
-    slash = command(setup.commands,'slash')
-    #path = fileName.split(slash)
-    dir = ''
-    if slash in fileName:
-        dir = slash.join(fileName.split(slash)[:1])
-    if os.path.exists(fileName) == False:
-        print('[*] Creating the file %s' % fileName)
-        os.system("%s %s" % (command(setup.commands,'create'), fileName))
-        print('[+] %s created' % fileName)
-        return fileName
+    slash = command(setup.commands, 'slash')
+    directory = ''
+    if slash in file_name:
+        directory = slash.join(file_name.split(slash)[:1])
+    if not os.path.exists(file_name):
+        print('[*] Creating the file %s' % file_name)
+        os.system("%s %s" % (command(setup.commands, 'create'), file_name))
+        print('[+] %s created' % file_name)
+        return file_name
     else:
-        print("%s already exists" % fileName)
+        print("%s already exists" % file_name)
         x = str(input("\tDo you want to overwrite it? y/n "))
-        if x == 'y' or x == 'Y'  or x == 'yes':
-            print('[*] Overwriting the file %s ....' % fileName)
-            os.system("%s %s" % (command(setup.commands, 'create'), fileName))
-            print('[+] %s overwritten' % fileName)
-            return fileName
+        if x == 'y' or x == 'Y' or x == 'yes':
+            print('[*] Overwriting the file %s ....' % file_name)
+            os.system("%s %s" % (command(setup.commands, 'create'), file_name))
+            print('[+] %s overwritten' % file_name)
+            return file_name
         elif x == 'n' or x == 'N' or x == 'no':
             output = str(input('output file: '))
-            if not dir:
+            if not directory:
                 return ifexists(output)
             else:
-                return ifexists('%s%s%s' % (dir, slash, output))
+                return ifexists('%s%s%s' % (directory, slash, output))
         else:
             print('[-] Invalid input')
-            return ifexists(fileName)
+            return ifexists(file_name)
 
-def check_proxychains(proxychains):
-    '''
+
+def check_proxychains(proxychains: int) -> int:
+    """
     Cheks the existence of the proxychains.conf file
     and sets the proxychans and tor options defines in the "Setup.setup.py" file
     :param   proxychains: int
     :return: proxychains: int
-    '''
+    """
     if setup.proxychains == "On" or setup.proxychains == "on" or setup.proxychains == "ON":
         print("proxychains is set to 'on'")
         print("[*] Cheking the /etc/proxychains.conf file")
@@ -110,38 +115,42 @@ def check_proxychains(proxychains):
                 print("tor is set to On")
                 cmd = "sudo service tor start"
                 print("[*] Activating tor with\n\t%s" % cmd)
-                try:
-                    os.system(cmd)
+                ret = os.system(cmd)
+                if ret == 0:
                     print("[+] tor activated")
-                except:
+                else:
                     print("[-] Unable to activate tor")
         else:
             print("[-] /etc/proxychains.conf does not exist. Unable to activate proxychains")
             proxychains = 0
     return proxychains
 
+
 def get_ip():
     try:
         host_name = socket.gethostname()
         host_ip = socket.gethostbyname(host_name)
-        return (host_name, host_ip)
-    except:
+        return host_name, host_ip
+    except Exception:
         print("Unable to get Hostname and IP")
         return
 
-def getVersion():
+
+def get_version() -> str:
     os.system('python --version "$1" > tempFile 2>&1')
-    pythonVersion = open('tempFile', 'r').readline().split("Python ")[1].strip('\n')
-    #pythonVersion = open('tempFile', 'r').readline().split("python ")[1].split(")")[0]
-    if '3' in pythonVersion:
+    python_version = open('tempFile', 'r').readline().split("Python ")[1].strip('\n')
+    if '3' in python_version:
         version = ""
-    elif '2' in pythonVersion:
+    elif '2' in python_version:
         version = '3'
+    else:
+        raise Exception("Version Not Found")
     return version
 
-def exception_handeler(error, file):
+
+def exception_handler(error: str, file: str) -> None:
     now = datetime.now()
-    with open("Logs/"+file+".txt", 'a') as f:
-        f.write("*"*90+"\n")
-        f.write(str(now.strftime("%d/%m/%Y %H:%M:%S"))+"\n")
-        f.write(error+"\n\n")
+    with open("Logs/" + file + ".txt", 'a') as f:
+        f.write("*" * 90 + "\n")
+        f.write(str(now.strftime("%d/%m/%Y %H:%M:%S")) + "\n")
+        f.write(error + "\n\n")

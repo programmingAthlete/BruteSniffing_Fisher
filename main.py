@@ -1,15 +1,14 @@
 import sys
 import traceback
 
-
-
-from Setup.check import check
+from Setup.check import check, setup
+from utils.utils import exception_handler
 
 
 @check
 def main():
     import modules.controller as controller
-    from Includes import includes
+
     print('''
     Welcome to the BRUTESNIFFING FICHER, an hacking tool that anables you to do bruteforcing attacks - 
     on web servers and on secured files, fishing attacks and scanning and sniffing attacks
@@ -26,10 +25,8 @@ def main():
     except Exception as e:
         print("\n[-] Exception occored\n")
         print(e)
-        includes.exception_handeler(traceback.format_exc(), "main/")
+        exception_handler(traceback.format_exc(), "main")
 
 
 if __name__ == "__main__":
-    from Setup import setup, check
-    ## Check the requirements
     main()
