@@ -12,7 +12,8 @@ class Cloning:
     def __str__(self):
         return 'Cloning attack'
 
-    def run(self):
+    @staticmethod
+    def run():
         clone()
 
 

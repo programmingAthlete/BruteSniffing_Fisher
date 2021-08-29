@@ -13,7 +13,8 @@ class Fishing:
     def __str__(self):
         return 'Fishing attack'
 
-    def run(self):
+    @staticmethod
+    def run():
         fish()
 
 

@@ -11,7 +11,8 @@ class Sniffing:
     def __str__(self):
         return 'Sniffing attack'
 
-    def run(self):
+    @staticmethod
+    def run():
         sniffing()
 
 

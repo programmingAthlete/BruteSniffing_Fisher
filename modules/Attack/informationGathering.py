@@ -9,6 +9,7 @@ class InformationGathering:
     def __str__():
         return 'Nmap attack'
 
+    @staticmethod
     def run():
         scanner()
 
