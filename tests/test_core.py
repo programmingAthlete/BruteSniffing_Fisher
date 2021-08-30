@@ -5,7 +5,7 @@ from modules.Attack.core import Core
 
 
 def mock_fun():
-    return "ok"
+    return "pass"
 
 
 class TestCoreClass(unittest.TestCase):
