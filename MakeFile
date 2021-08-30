@@ -1,0 +1,6 @@
+PYTHON = python
+
+.PHONY: tests
+tests: ; $(info $(M) testing package...)  ## test package
+	pip install pytest > /dev/null
+	python -m pytest tests
