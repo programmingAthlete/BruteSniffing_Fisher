@@ -32,7 +32,7 @@ def fish():
     # Checks on the existence and craeation if necessary
     if not os.path.isdir(directory):
         os.system('mkdir %s' % directory)
-    file_name = include.ifexists(file_name)
+    file_name = include.if_exists(file_name)
 
     # Clone the page and do the necessary edits
     page = clone.clone()

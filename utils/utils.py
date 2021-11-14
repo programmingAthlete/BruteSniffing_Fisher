@@ -2,8 +2,6 @@ import os
 import socket
 from datetime import datetime
 
-
-
 import Setup.setup as setup
 
 
@@ -35,7 +33,7 @@ def construct_url(url: str) -> (str, str):
     return url, site_domain
 
 
-def ifexists(file_name: str) -> str:
+def if_exists(file_name: str) -> str:
     """
     Checks the existence of a file
         if False creates it and saves it't location in 'fileName'
@@ -66,12 +64,12 @@ def ifexists(file_name: str) -> str:
         elif x == 'n' or x == 'N' or x == 'no':
             output = str(input('output file: '))
             if not directory:
-                return ifexists(output)
+                return if_exists(output)
             else:
-                return ifexists('%s%s%s' % (directory, slash, output))
+                return if_exists('%s%s%s' % (directory, slash, output))
         else:
             print('[-] Invalid input')
-            return ifexists(file_name)
+            return if_exists(file_name)
 
 
 def check_proxychains(proxychains: int) -> int:
@@ -108,8 +106,8 @@ def get_ip():
         host_name = socket.gethostname()
         host_ip = socket.gethostbyname(host_name)
         return host_name, host_ip
-    except Exception:
-        print("Unable to get Hostname and IP")
+    except Exception as exc:
+        print(f"Unable to get Hostname and IP: {exc}")
         return
 
 

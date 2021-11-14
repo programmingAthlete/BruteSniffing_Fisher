@@ -1,12 +1,13 @@
 import nmap
-import time
+import os
 import utils.utils as include
 import Setup.setup as setup
 import time
 
+
 class InformationGathering:
 
-    def __str__():
+    def __str__(self):
         return 'Nmap attack'
 
     @staticmethod
@@ -15,25 +16,25 @@ class InformationGathering:
 
 
 def scanner():
-    ''' Runs the scanner '''
+    """ Runs the scanner """
 
     slash = include.command(setup.commands, 'slash')
-    dir = "data%sInformationGathering" % slash
+    directory = "data%sInformationGathering" % slash
 
     target = str(input('target to scan: '))
     port = str(input('port where to scan: '))
     try:
         nm_scan = nmap.PortScanner()
-    except:
-        print("[-] An error occorred while initiating the scan")
+    except Exception as exc:
+        print(f"[-] An error occorred while initiating the scan {exc}")
         time.sleep(1)
         print("Exiting the attack....")
         time.sleep(5)
         return
     try:
         nm_scanner = nm_scan.scan(target, port, arguments='-O')  # -O argument for OS finger printing
-    except:
-        print("[-] Incorrect host %s" % target)
+    except Exception as exc:
+        print(f"[-] Incorrect host %s - {exc}" % target)
         time.sleep(2)
         print("Exiting the attack....")
         time.sleep(5)
@@ -42,17 +43,18 @@ def scanner():
     port_is_open = "The port %s is : %s" % (port, nm_scanner['scan'][target]['tcp'][int(port)]['state']) + "\n"
     methos_scan = "The method of scanning is : " + nm_scanner['scan'][target]['tcp'][int(port)]['reason'] + "\n"
 
-    # Checks on the existence and craeation if necessary
-    if os.path.isdir(dir) == False:
-        os.system('mkdir %s' % dir)
+    # Checks on the existence and creation if necessary
+    if not os.path.isdir(directory):
+        os.system('mkdir %s' % directory)
     var = 'w'
-    if os.path.isfile(dir + target + ".txt"):
+    if os.path.isfile(directory + target + ".txt"):
         var = 'a'
 
-    with open(dir + target + ".txt", var) as f:
+    with open(directory + target + ".txt", var) as f:
         f.write('\n')
         f.write(host_is_up + port_is_open + methos_scan)
         f.write("\nReport generated " + time.strftime("%Y-%m-%d_%H:%M:%S GMT", time.gmtime()))
         f.write('\n')
 
-    print("[+] The scan on %s and port %s completed succeffuly.\n The results are in /data/%s.txt" %(target, port, target))
+    print("[+] The scan on %s and port %s completed succeffuly.\n The results are in /data/%s.txt" % (
+        target, port, target))
