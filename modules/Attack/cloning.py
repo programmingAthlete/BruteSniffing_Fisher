@@ -3,6 +3,7 @@ import time
 
 import requests
 
+import utils.parser
 import utils.utils as include
 from Setup.setup import commands
 
@@ -46,7 +47,7 @@ def clone():
     f.write(page.text.encode('utf-8'))
     f.close()
 
-    include.html_parser(file_name, "%s%s%s.html" % (directory, slash, name))
+    utils.parser.html_parser(file_name, "%s%s%s.html" % (directory, slash, name))
 
     os.system("%s %s" % (include.command(commands, 'remove'), file_name))
 
