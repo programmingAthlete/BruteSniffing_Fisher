@@ -16,11 +16,13 @@ def extract_string(line):
         string += line[i]
     return string.strip("'")
 
+
 def fill(liste, out):
     for i in range(1, len(liste)):
         if "###" not in liste[i] or liste[i] != "\n":
             out[liste[i].split(' ')[0]] = out.split[' '][1]
     return out
+
 
 def get_key(value, dict):
     '''
@@ -33,6 +35,7 @@ def get_key(value, dict):
     for key in dict:
         if dict[key] == value:
             return key
+
 
 def construct_menus():
     '''
@@ -68,9 +71,9 @@ def construct_menus():
             if lines[i] != "\n" and '###' not in lines[i]:
                 key = int(lines[i].split(' ')[0])
                 dicto[key] = extract_string(lines[i])
-            if i == j and i != 0 or i == len(lines) -1:
+            if i == j and i != 0 or i == len(lines) - 1:
                 dir[n] = dicto
-                if i != len(lines) -1:
+                if i != len(lines) - 1:
                     n += 1
                 dicto = {}
     f.close()

@@ -36,7 +36,11 @@ def check(fun):
         exceptions = []
         for item in mod:
             try:
-                import_module(item.split("==")[0])
+                if item and "#" != item[0]:
+                    if item[:3] == "git":
+                        import_module(item.split("/")[-1])
+                    else:
+                        import_module(item.split("==")[0])
             except ImportError:
                 exceptions.append(item)
         command_version, version = get_version()
@@ -61,7 +65,7 @@ def check(fun):
                 command_version)
             print(show)
             for item in exceptions:
-                command = f"python{command_version} -m pip install {item}"
+                command = f"python{command_version} -m pip install '{item}'"
                 print(f'\t{command}')
 
             a = str(input('Do you want to install the packages atomatically???? y/n '))
@@ -70,13 +74,15 @@ def check(fun):
                 for item in exceptions:
                     try:
                         os.system(f"python{command_version} -m pip install {item}")
-
                     except Exception as exc:
                         print(f"Error {exc} occured while installing the package")
                         print("check the your 'pip' settings or your python version")
                         sys.exit(0)
                     try:
-                        import_module(item.split("==")[0])
+                        if item[:3] == 'git':
+                            import_module(item.split("/")[-1])
+                        else:
+                            import_module(item.split("==")[0])
                         print(f"[+] {item} successfully installed")
                     except Exception as exc:
                         print(f"Error {exc} occur while installing the package")
