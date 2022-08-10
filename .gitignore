@@ -1,2 +1,4 @@
 .idea
 venv
+Logs/main.txt
+Logs/controller.txt
