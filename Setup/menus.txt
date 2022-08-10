@@ -15,3 +15,5 @@
 
 ### 'Crypto Analysis' ###
 1 'Rsa'
+98 'Back'
+99 'Exit'

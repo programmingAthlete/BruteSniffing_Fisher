@@ -226,3 +226,31 @@ Traceback (most recent call last):
 sqlite3.OperationalError: no such table: keys
 
 
+******************************************************************************************
+11/08/2022 01:07:28
+Traceback (most recent call last):
+  File "main.py", line 21, in main
+    session.start()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/controller.py", line 84, in start
+    self.attack.run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/controller.py", line 97, in run
+    attack.run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/core.py", line 23, in run
+    module = importlib.import_module('modules.Attack.' + self.module)
+  File "/usr/lib/python3.8/importlib/__init__.py", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1014, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 991, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 975, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 671, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 848, in exec_module
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/rsa.py", line 87, in <module>
+    def encrypt(message):
+  File "/home/mintu/dev/BruteSniffing_Fisher/venv/lib/python3.8/site-packages/click/decorators.py", line 308, in decorator
+    _param_memo(f, OptionClass(param_decls, **option_attrs))
+  File "/home/mintu/dev/BruteSniffing_Fisher/venv/lib/python3.8/site-packages/click/core.py", line 2495, in __init__
+    super().__init__(param_decls, type=type, multiple=multiple, **attrs)
+TypeError: __init__() got an unexpected keyword argument 'description'
+
+
