@@ -2,3 +2,5 @@
 venv
 Logs/main.txt
 Logs/controller.txt
+
+tests/.pytest_cache
