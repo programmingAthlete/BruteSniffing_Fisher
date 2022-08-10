@@ -1,3 +1,4 @@
 .idea
 venv
-Logs/*
+Logs/main.txt
+Logs/controller.txt
