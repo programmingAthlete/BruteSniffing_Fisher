@@ -199,3 +199,30 @@ Traceback (most recent call last):
 AttributeError: module 'modules.Attack.rsa' has no attribute 'Rsa'
 
 
+******************************************************************************************
+11/08/2022 00:48:34
+Traceback (most recent call last):
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/rsa.py", line 47, in run
+    x = str(input("> "))
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "main.py", line 21, in main
+    session.start()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/controller.py", line 84, in start
+    self.attack.run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/controller.py", line 97, in run
+    attack.run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/core.py", line 35, in run
+    class_.run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/rsa.py", line 20, in run
+    run()
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/rsa.py", line 52, in run
+    Rsa.exit(c=c, connection=conn)
+  File "/home/mintu/dev/BruteSniffing_Fisher/modules/Attack/rsa.py", line 39, in exit
+    c.execute("DROP table keys")
+sqlite3.OperationalError: no such table: keys
+
+
