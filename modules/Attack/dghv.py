@@ -1,3 +1,4 @@
+import ast
 import os
 import random
 import sqlite3
@@ -35,7 +36,7 @@ class Dghv:
     @staticmethod
     def add_key(c, connection, key, schema_name):
         c.execute(f'INSERT INTO keys(schema_name, private_key, public_key) '
-                  f'VALUES ({schema_name}, {key.private}, {key.public})')
+                  f'VALUES ({schema_name}, {int(key.private)}, {int(key.public)})')
         connection.commit()
 
     @staticmethod
@@ -81,7 +82,7 @@ def main():
 @click.option('-t', '--tau', help='Number of components of the public key - Default = 20', default=10)
 def generate_keys(number_of_bites=100, tau=10):
     """
-    Generate RSA keys corresponding to k bits prime numbers - for correct decryption use k < 50. Improvements will
+    Generate DGHV keys corresponding to k bits prime numbers - for correct decryption use k < 1200. Improvements will
     come in next PR
     """
     private_key = random.getrandbits(number_of_bites)
@@ -99,7 +100,7 @@ def show_keys():
 @click.option("-m", "--message")
 def encrypt(message):
     """
-    Encrypt message via TextBook RSA. Message must be without space. Improvement wil come in next PR
+    Encrypt message via DGHV. Message must be without space. Improvement wil come in next PR
     """
     key = Dghv.get_latest_key(c)
     encrypted = DGHV.encrypt_full_message(message=message, e=int(key[2]))
@@ -107,13 +108,12 @@ def encrypt(message):
 
 
 @main.command("decrypt")
-@click.option("-m", "--message", type=list)
+@click.option("-m", "--message", type=str)
 def decrypt(message):
-    """ Decrypt message via TextBook RSA. Paste the list provided by the encryption with single quotes.
+    """ Decrypt message via DGHV. Paste the list provided by the encryption with single quotes.
     Decryption reading a file will come in the next PR"""
     key = Dghv.get_latest_key(c)
-    enc_m = message
-    print(enc_m)
+    enc_m = ast.literal_eval(message)
     decrypted = DGHV.decrypt_full_message(c=enc_m, p=int(key[1]))
     print(decrypted)
 
