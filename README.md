@@ -23,6 +23,11 @@ It allows you do to:
     * Web Server Bruteforcing
     * Cloning
     * Fishing
+* Crypto Analysis
+  * RSA encryption schema
+  * DGHV encryption schema with public key compression
+
+At the moment only enrcyption and decryption by the two schemas are possible, mathematical attacks on RSA will come in the further commits. 
 
 ## Python version
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
@@ -38,6 +43,7 @@ Libraries to install:
 * ctypes
 * netaddr
 * python-nmap
+* crypto_pkg package for the cryptography ( always by me - https://github.com/programmingAthlete/crypto_pkg) - I am currently looking for a solution to use the SageMath library (crypto schemes and attack work well with it) and automatise its installation in python venvs - I think that docker is the solution.  
 
 ## Structure
 Hirerchy of the project:
