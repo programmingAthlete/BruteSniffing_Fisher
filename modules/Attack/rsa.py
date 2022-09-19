@@ -48,12 +48,14 @@ class Rsa:
 
 def run():
     Rsa.create_table(c)
+    print(usage())
     while True:
         try:
             x = str(input("> "))
-            n = f"python {path} {x}"
-            print(n)
-            os.system(n)
+            if x != "":
+                n = f"python {path} {x}"
+                print(n)
+                os.system(n)
         except KeyboardInterrupt:
             Rsa.exit(c=c, connection=conn)
             break
@@ -84,6 +86,9 @@ def generate_keys(number_of_bites=20):
 
 @main.command("show_keys")
 def show_keys():
+    """
+    Display all generated keys
+    """
     print(Rsa.show_keys(c))
 
 
@@ -114,6 +119,30 @@ def decrypt(message):
         decrypted_number = RSA.decrypt(c=item, d=key[1], n=key[3])
         decrypted.append(chr(int(decrypted_number)))
     print(''.join(decrypted))
+
+
+@main.command("help")
+def help():
+    """
+    Display help message
+    """
+    print(usage())
+    os.system(f'python {path} --help')
+
+
+def usage():
+    use = "Encrypt and decrypt messages via textbook RSA schema.\n\n" \
+          "\tGenerate the keys via the command \n\t\tgenerate_keys -k <bitsize>\n\t\tMultiple keys can be generated" \
+          "\n\t See the generated keys via the command show_keys\n" \
+          "\t Encrypt a message via the command \n\t\tencrypt -m <message>\n\t\tAt the moment the message can only be" \
+          " an integer number.The last generated keys is used. At the moment" \
+          "there is still not option to explicitly choose the key with which to encrypt.\n" \
+          "\tDecrypt a message via the command\n\t\tdecrypt message -m <message>\n" \
+          "\t\tThe last generated keys is used. At the moment there is still not option to explicitly choose the key " \
+          "with which to decrypt.\n" \
+          "Get help of a specific command by\n" \
+          "\t<command> --help\n\n"
+    return use
 
 
 if __name__ == '__main__':

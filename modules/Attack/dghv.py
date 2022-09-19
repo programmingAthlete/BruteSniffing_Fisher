@@ -2,12 +2,11 @@ import ast
 import os
 import random
 import sqlite3
-import time
 
 import click
-import orjson
 import pydantic
 from crypto_pkg.DGHV.dghv import DGHV
+
 
 path = "modules/Attack/dghv.py"
 
@@ -57,12 +56,14 @@ class Dghv:
 
 def run():
     Dghv.create_table(c)
+    print(usage())
     while True:
         try:
             x = str(input("> "))
-            n = f"python {path} {x}"
-            print(n)
-            os.system(n)
+            if x != "":
+                n = f"python {path} {x}"
+                print(n)
+                os.system(n)
         except KeyboardInterrupt:
             Dghv.exit(c=c, connection=conn)
             break
@@ -116,6 +117,30 @@ def decrypt(message):
     enc_m = ast.literal_eval(message)
     decrypted = DGHV.decrypt_full_message(c=enc_m, p=int(key[1]))
     print(decrypted)
+
+
+@main.command("help")
+def help():
+    """
+    Display help message
+    """
+    print(usage())
+    os.system(f'python {path} --help')
+
+
+def usage():
+    use = "Encrypt and decrypt messages via textbook RSA schema.\n\n" \
+          "\tGenerate the keys via the command \n\t\tgenerate_keys -k <bitsize>\n\t\tMultiple keys can be generated" \
+          "\n\t See the generated keys via the command show_keys\n" \
+          "\t Encrypt a message via the command \n\t\tencrypt -m <message>\n\t\tAt the moment the message can only be" \
+          " an integer number.The last generated keys is used. At the moment" \
+          "there is still not option to explicitly choose the key with which to encrypt.\n" \
+          "\tDecrypt a message via the command\n\t\tdecrypt message -m <message>\n" \
+          "\t\tThe last generated keys is used. At the moment there is still not option to explicitly choose the key " \
+          "with which to decrypt.\n" \
+          "Get help of a specific command by\n" \
+          "\t<command> --help\n\n"
+    return use
 
 
 if __name__ == '__main__':
