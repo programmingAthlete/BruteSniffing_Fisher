@@ -43,7 +43,8 @@ Libraries to install:
 * ctypes
 * netaddr
 * python-nmap
-* crypto_pkg package for the cryptography ( always by me - https://github.com/programmingAthlete/crypto_pkg) - I am currently looking for a solution to use the SageMath library (crypto schemes and attack work well with it) and automatise its installation in python venvs - I think that docker is the solution.  
+* lxml
+* crypto_pkg package for the cryptography ( still by me - https://github.com/programmingAthlete/crypto_pkg) - I am currently looking for a solution to use the SageMath library (crypto schemes and attack work well with it) and automatise its installation in python venvs - I think that docker is the solution.  
 
 ## Structure
 Hirerchy of the project:
