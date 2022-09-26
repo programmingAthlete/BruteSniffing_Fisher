@@ -1,3 +1,6 @@
+from bs4 import BeautifulSoup
+
+
 def html_parser(file_name: str, output_file: str) -> None:
     """
     Edits the action parameter of the form to index.txt of the file "filename"
@@ -9,7 +12,7 @@ def html_parser(file_name: str, output_file: str) -> None:
 
     with open(file_name, 'r') as f:
         txt = f.read()
-    soup = bs4.BeautifulSoup(txt, features='lxml')
+    soup = BeautifulSoup(txt, features='lxml')
     tag = soup.form
     tag['action'] = "index.php"
     print("---------------------------------------------")

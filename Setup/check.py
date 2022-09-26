@@ -39,6 +39,8 @@ def check(fun):
                 if item and "#" != item[0]:
                     if item[:3] == "git":
                         import_module(item.split("/")[-1])
+                    elif "beautifulsoup4" in item:
+                        import_module("bs4")
                     else:
                         import_module(item.split("==")[0])
             except ImportError:
