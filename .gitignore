@@ -7,3 +7,8 @@ tests/.pytest_cache
 
 keys.db
 keys2.db
+data/Cloned/Temp.html
+data/Fishing
+modules/Attack/__pycache__
+tests/__pychache__
+utils/__pychache__
