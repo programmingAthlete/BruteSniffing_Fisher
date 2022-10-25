@@ -27,7 +27,7 @@ It allows you do to:
   * RSA encryption schema
   * DGHV encryption schema with public key compression
 
-At the moment only enrcyption and decryption by the two schemas are possible, mathematical attacks on RSA will come in the further commits. 
+At the moment only enrcyption and decryption by the two schemas are possible, mathematical attacks on RSA will come in the further commits. ***The RSA encryption scheme does not work for big keys, this is because the key is stored in an SQLite DB which cannot store such big integers. A fix for it will be applied in the next commits by using a session variables or a temporary file as storage***.
 
 ## Python version
 The program has been developed using python3.6. However no issue should occur with older 3. versions.
