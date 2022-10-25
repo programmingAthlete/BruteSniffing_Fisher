@@ -40,7 +40,11 @@ def check(fun):
                     if item[:3] == "git":
                         import_module(item.split("/")[-1].split("@")[0])
                     else:
-                        import_module(item.split("==")[0])
+                        pkg = item.split("==")
+                        if pkg[0] == "beautifulsoup4":
+                            import_module("bs4")
+                        else:
+                            import_module(pkg[0])
             except ImportError:
                 exceptions.append(item)
         command_version, version = get_version()

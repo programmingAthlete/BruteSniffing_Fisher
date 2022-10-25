@@ -110,7 +110,7 @@ def encrypt(message):
         return
     try:
         encrypted = RSA.encrypt_message(message=message, e=key[2], n=key[3])
-        print(int(float(encrypted)))
+        print(int(encrypted))
     except MessageTooBigError:
         print(f"Message {message} cannot be bigger that n-1 = {key[3] - 1}")
 
