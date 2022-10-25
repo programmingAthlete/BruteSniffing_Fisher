@@ -99,11 +99,7 @@ def encrypt(message):
     Encrypt message via TextBook RSA. Message must be without space. Improvement wil come in next PR
     """
     key = Rsa.get_latest_key(c)
-    encrypted = []
-    for ch in message:
-        char_c = ord(ch)
-        enc = RSA.encrypt(m=char_c, e=key[2], n=key[3])
-        encrypted.append(enc)
+    encrypted = RSA.encrypt_message(message=message, e=key[2], n=key[3])
     print(encrypted)
 
 
@@ -113,12 +109,10 @@ def decrypt(message):
     """ Decrypt message via TextBook RSA. Paste the list provided by the encryption with single quotes.
     Decryption reading a file will come in the next PR"""
     key = Rsa.get_latest_key(c)
+
     message_list = json.loads(message)
-    decrypted = []
-    for item in message_list:
-        decrypted_number = RSA.decrypt(c=item, d=key[1], n=key[3])
-        decrypted.append(chr(int(decrypted_number)))
-    print(''.join(decrypted))
+    decrypted = RSA.decrypt_message(cipher_text=message_list, d=key[1], n=key[3])
+    print(decrypted)
 
 
 @main.command("help")
