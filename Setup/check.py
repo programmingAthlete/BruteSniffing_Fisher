@@ -38,9 +38,7 @@ def check(fun):
             try:
                 if item and "#" != item[0]:
                     if item[:3] == "git":
-                        import_module(item.split("/")[-1])
-                    elif "beautifulsoup4" in item:
-                        import_module("bs4")
+                        import_module(item.split("/")[-1].split("@")[0])
                     else:
                         import_module(item.split("==")[0])
             except ImportError:
@@ -72,26 +70,7 @@ def check(fun):
 
             a = str(input('Do you want to install the packages atomatically???? y/n '))
             if str(a) == 'y':
-
-                for item in exceptions:
-                    try:
-                        os.system(f"python{command_version} -m pip install {item}")
-                    except Exception as exc:
-                        print(f"Error {exc} occured while installing the package")
-                        print("check the your 'pip' settings or your python version")
-                        sys.exit(0)
-                    try:
-                        if item[:3] == 'git':
-                            import_module(item.split("/")[-1])
-                        else:
-                            import_module(item.split("==")[0])
-                        print(f"[+] {item} successfully installed")
-                    except Exception as exc:
-                        print(f"Error {exc} occur while installing the package")
-                        print("check the your 'pip' settings or your python version")
-                        sys.exit(0)
-
-                os.execv(sys.executable, [sys.executable] + sys.argv)
+                os.system(f"python{command_version} -m pip install -r requirements.txt")
             elif a == 'n':
                 os.execv(sys.executable, [sys.executable] + sys.argv)
                 sys.exit(0)
