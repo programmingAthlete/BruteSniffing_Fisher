@@ -3,7 +3,7 @@ import os
 import sqlite3
 
 import click
-from crypto_pkg.rsa.rsa_scheme import RSA
+from crypto_pkg.rsa.rsa_scheme import RSA, MessageTooBigError
 
 path = "modules/Attack/rsa.py"
 
@@ -54,7 +54,6 @@ def run():
             x = str(input("> "))
             if x != "":
                 n = f"python {path} {x}"
-                print(n)
                 os.system(n)
         except KeyboardInterrupt:
             Rsa.exit(c=c, connection=conn)
@@ -96,23 +95,27 @@ def show_keys():
 @click.option("-m", "--message")
 def encrypt(message):
     """
-    Encrypt message via TextBook RSA. Message must be without space. Improvement wil come in next PR
+    Encrypt message via TextBook RSA. Encryption scheme only works with small keys and small messages
+    Improvement wil come in next PRs.
     """
     key = Rsa.get_latest_key(c)
-    encrypted = RSA.encrypt_message(message=message, e=key[2], n=key[3])
-    print(encrypted)
+    try:
+        encrypted = RSA.encrypt_message(message=message, e=key[2], n=key[3])
+        print(int(float(encrypted)))
+    except MessageTooBigError:
+        print(f"Message {message} cannot be bigger that n-1 = {key[3]-1}")
 
 
 @main.command("decrypt")
 @click.option("-m", "--message")
 def decrypt(message):
-    """ Decrypt message via TextBook RSA. Paste the list provided by the encryption with single quotes.
-    Decryption reading a file will come in the next PR"""
+    """ Decrypt message via TextBook RSA."""
     key = Rsa.get_latest_key(c)
-
-    message_list = json.loads(message)
-    decrypted = RSA.decrypt_message(cipher_text=message_list, d=key[1], n=key[3])
-    print(decrypted)
+    try:
+        decrypted = RSA.decrypt_message(cipher_text=int(message), d=key[1], n=key[3])
+        print(decrypted)
+    except Exception:
+        print("Message/key size too large. Solutions for this will come in the next PRs")
 
 
 @main.command("help")
@@ -129,7 +132,7 @@ def usage():
           "\tGenerate the keys via the command \n\t\tgenerate_keys -k <bitsize>\n\t\tMultiple keys can be generated" \
           "\n\t See the generated keys via the command show_keys\n" \
           "\t Encrypt a message via the command \n\t\tencrypt -m <message>\n\t\tAt the moment the message can only be" \
-          " an integer number.The last generated keys is used. At the moment" \
+          " decrypted with small keys. The last generated keys is used. At the moment" \
           "there is still not option to explicitly choose the key with which to encrypt.\n" \
           "\tDecrypt a message via the command\n\t\tdecrypt message -m <message>\n" \
           "\t\tThe last generated keys is used. At the moment there is still not option to explicitly choose the key " \
