@@ -1,4 +1,3 @@
-import json
 import os
 import sqlite3
 
@@ -9,6 +8,10 @@ path = "modules/Attack/rsa.py"
 
 conn = sqlite3.connect('keys.db')
 c = conn.cursor()
+
+
+class KeyNotFoundError(Exception):
+    """Raised if the no kex is found"""
 
 
 class Rsa:
@@ -43,6 +46,8 @@ class Rsa:
     @classmethod
     def get_latest_key(cls, c):
         keys = cls.show_keys(c)
+        if len(keys) == 0:
+            raise KeyNotFoundError
         return keys[-1]
 
 
@@ -98,19 +103,27 @@ def encrypt(message):
     Encrypt message via TextBook RSA. Encryption scheme only works with small keys and small messages
     Improvement wil come in next PRs.
     """
-    key = Rsa.get_latest_key(c)
+    try:
+        key = Rsa.get_latest_key(c)
+    except KeyNotFoundError:
+        print("Generate a key first")
+        return
     try:
         encrypted = RSA.encrypt_message(message=message, e=key[2], n=key[3])
         print(int(float(encrypted)))
     except MessageTooBigError:
-        print(f"Message {message} cannot be bigger that n-1 = {key[3]-1}")
+        print(f"Message {message} cannot be bigger that n-1 = {key[3] - 1}")
 
 
 @main.command("decrypt")
 @click.option("-m", "--message")
 def decrypt(message):
     """ Decrypt message via TextBook RSA."""
-    key = Rsa.get_latest_key(c)
+    try:
+        key = Rsa.get_latest_key(c)
+    except KeyNotFoundError:
+        print("Generate a key first")
+        return
     try:
         decrypted = RSA.decrypt_message(cipher_text=int(message), d=key[1], n=key[3])
         print(decrypted)
