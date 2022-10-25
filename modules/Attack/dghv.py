@@ -7,6 +7,7 @@ import click
 import pydantic
 from crypto_pkg.DGHV.dghv import DGHV
 
+from modules.Attack.rsa import KeyNotFoundError
 
 path = "modules/Attack/dghv.py"
 
@@ -103,7 +104,11 @@ def encrypt(message):
     """
     Encrypt message via DGHV. Message must be without space. Improvement wil come in next PR
     """
-    key = Dghv.get_latest_key(c)
+    try:
+        key = Dghv.get_latest_key(c)
+    except KeyNotFoundError:
+        print("Generate a key first")
+        return
     encrypted = DGHV.encrypt_full_message(message=message, e=int(key[2]))
     print(encrypted)
 
@@ -113,7 +118,11 @@ def encrypt(message):
 def decrypt(message):
     """ Decrypt message via DGHV. Paste the list provided by the encryption with single quotes.
     Decryption reading a file will come in the next PR"""
-    key = Dghv.get_latest_key(c)
+    try:
+        key = Dghv.get_latest_key(c)
+    except KeyNotFoundError:
+        print("Generate a key first")
+        return
     enc_m = ast.literal_eval(message)
     decrypted = DGHV.decrypt_full_message(c=enc_m, p=int(key[1]))
     print(decrypted)
