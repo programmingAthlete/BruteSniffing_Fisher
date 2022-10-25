@@ -80,9 +80,10 @@ Proxychains and Tor are supported for Linux platforms. Edit the settings in the 
 <img src="Screenshot/webAttackMenu.png">
 
 ## Issues and Improvements
-* Functionalities can be added adding 'menus' in the Setup/menus.txt file, modules in the modules directories and functions in the Includes/includes.py file.
+* Functionalities can be added 'menus' in the Setup/menus.txt file, modules in the modules directories and functions in the Includes/includes.py file.
 * The server settings may be improved, the goal would be to make the fishing attack available using the default web server of a system
 * In the fishing attack the python program waits for a tmp.txt file to be created by the php code, then deletes it. The process has to be slowed down for the python program to grab the tmp.txt file.
+* The encryption schemes (mostly the RSA one) does not work for big keys, this is because the key is stored in an SQLite DB which cannot store such big integers. A solution will be applied by using a session variables or a temporary file as storage.
 
 ## References
 Reference for the web page bruteforcing: https://github.com/IAmBlackHacker/Facebook-BruteForce

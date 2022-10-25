@@ -7,12 +7,14 @@ import click
 import pydantic
 from crypto_pkg.DGHV.dghv import DGHV
 
-from modules.Attack.rsa import KeyNotFoundError
-
 path = "modules/Attack/dghv.py"
 
 conn = sqlite3.connect('keys2.db')
 c = conn.cursor()
+
+
+class KeyNotFoundError(Exception):
+    """Raised if the no kex is found"""
 
 
 class DghvKeys(pydantic.BaseModel):
