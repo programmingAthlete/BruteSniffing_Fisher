@@ -1,5 +1,5 @@
 requests==2.26.0
-nmap==0.0.1
+python-nmap==0.7.1
 netaddr==0.8.0
 beautifulsoup4==4.11.1
 click==8.1.3
