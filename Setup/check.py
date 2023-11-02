@@ -43,6 +43,8 @@ def check(fun):
                         pkg = item.split("==")
                         if pkg[0] == "beautifulsoup4":
                             import_module("bs4")
+                        elif pkg[0] == 'python-nmap':
+                            import_module("nmap")
                         else:
                             import_module(pkg[0])
             except ImportError:
