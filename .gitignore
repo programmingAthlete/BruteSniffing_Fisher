@@ -4,6 +4,7 @@ Logs/main.txt
 Logs/controller.txt
 
 tests/.pytest_cache
+.pytest_cache
 
 keys.db
 keys2.db
