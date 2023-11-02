@@ -49,34 +49,27 @@ def check(fun):
                             import_module(pkg[0])
             except ImportError:
                 exceptions.append(item)
-        command_version, version = get_version()
+
         if len(exceptions) > 0:
             print("[-] The following libraries are missing")
             time.sleep(1)
             for item in exceptions:
                 print('\t%s' % item)
             print("\n")
-            if command_version != '':
-                print('''The python version you are using is different than your default version
-                \tdefault verion: %s
-                \tyour version: %s
-                ''' % (command_version, version))
-                print('You need to specify the python versions correpsonding command to install the packages')
 
             print('''To install the packeges needed:
-                            python%s -m pip install <package name> \n ''' % command_version)
+                            python -m pip install <package name> \n ''')
             show = '''To install the packages manually:\n
-                        \t python%s pip install <package name>\n If you want the program to install the packages
-                         automatically, the following commands will be performed''' % (
-                command_version)
+                        \t python pip install <package name>\n If you want the program to install the packages
+                         automatically, the following commands will be performed'''
             print(show)
             for item in exceptions:
-                command = f"python{command_version} -m pip install '{item}'"
+                command = f"python -m pip install '{item}'"
                 print(f'\t{command}')
 
             a = str(input('Do you want to install the packages atomatically???? y/n '))
             if str(a) == 'y':
-                os.system(f"python{command_version} -m pip install -r requirements.txt")
+                os.system(f"python -m pip install -r requirements.txt")
             elif a == 'n':
                 os.execv(sys.executable, [sys.executable] + sys.argv)
                 sys.exit(0)
