@@ -2,6 +2,7 @@
 venv
 Logs/main.txt
 Logs/controller.txt
+.coverage
 
 tests/.pytest_cache
 .pytest_cache
