@@ -1,5 +1,7 @@
 # BruteSniffing fisher
 
+<b>This repo is depricated, it will be replaced by it's CLI version [BruteSniffing_Fisher-CLI](https://github.com/programmingAthlete/BruteSniffing_Fisher-CLI)</b>
+
 ## Introduction
 
 Welcome to the ButeSniffing_Ficher, a multiplatform python hacking tool in a menu style.</br>
